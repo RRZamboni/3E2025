@@ -1,0 +1,29 @@
+--Criando o DB
+CREATE DATABASE produtinho
+
+
+--Criacao da tabela
+CREATE TABLE produto(
+    ID_PRODUTO INT AUTO_INCREMENT,
+    NOME VARCHAR(45),
+    DESCRICAO VARCHAR(45),
+    ID_AREA INT,
+    PRECO_UNI DOUBLE,
+	MOEDA VARCHAR(3),
+    PAIS_ORIGEM VARCHAR(45),
+    PRIMARY KEY(ID_PRODUTO)
+    )
+
+--Inserindo valores
+INSERT INTO produto(NOME,DESCRICAO,ID_AREA,PRECO_UNI,MOEDA,PAIS_ORIGEM)
+VALUES('Notebook','Notebook da Xuxa',1,3000.00,'R$','China')
+
+
+INSERT INTO produto(NOME,DESCRICAO,ID_AREA,PRECO_UNI,MOEDA,PAIS_ORIGEM)
+VALUES('Notebook','Notebook 2',1,3000.00,'R$','China'),
+('Notebook','Notebook 3',1,3000.00,'R$','China'),
+('Notebook','Notebook 4',1,3000.00,'R$','China'),
+('Notebook','Notebook 5',1,3000.00,'R$','China'),
+('Notebook','Notebook 6',1,3000.00,'R$','China'),
+('Notebook','Notebook 7',1,3000.00,'R$','China'),
+('Notebook','Notebook 8',1,3000.00,'R$','China')
