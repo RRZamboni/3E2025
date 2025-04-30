@@ -1,8 +1,22 @@
 <?php
 	//Conectando com o DB
-	include('conexao.php');
+	include('../Conexao/conexao.php');
 
-	//Query e select
+
+	//Verificando página atual
+	if(isset($_GET['pagina']))
+	{
+		$pagina = $_GET['pagina'];
+	}
+	else
+	{
+		$pagina = 1;
+	}
+
+
+
+
+	//Query e selec
 	$cmd = "SELECT * FROM produto";
 
 	//Executando a query
@@ -15,7 +29,24 @@
 	$registro = 4;
 
 	// Calculando  o total de páginas
+	//Ceil - arredonda o valor
 	$numpaginas = ceil($total/$registro);
+
+	//Var para calcular p inicio da próxima visualização
+	//tendo como base a página atual
+	$inicio = ($registro * $pagina) - $registro;
+
+	//Selecionando por página
+	$cmd = "SELECT * FROM produto
+			LIMIT $inicio,$registro";
+
+	$produto = mysqli_query($con,$cmd);
+
+
+
+
+
+
 
 
 ?>
@@ -57,12 +88,12 @@
 		{
 			echo "
 					<tr>
-						<td>".$linha['nome']."</td>
-						<td>".$linha['descricao']."</td>
-						<td>".$linha['id_area']."</td>
-						<td>".$linha['preco_uni']."</td>
-						<td>".$linha['moeda']."</td>
-						<td>".$linha['pais_origem']."</td>
+						<td>".$linha['NOME']."</td>
+						<td>".$linha['DESCRICAO']."</td>
+						<td>".$linha['ID_AREA']."</td>
+						<td>".$linha['PRECO_UNI']."</td>
+						<td>".$linha['MOEDA']."</td>
+						<td>".$linha['PAIS_ORIGEM']."</td>
 					</tr>
 			      ";
 
@@ -71,6 +102,36 @@
 			?>
 
 		</table>
+		<center>
+			<ul class="pagination">
+				<li>
+					<a href="listagem.php?pagina=1">
+						$laquo
+					</a>
+				</li>
+
+				<?php
+					for ($i=1; $i < $numpaginas; $i++) 
+					{ 
+						echo  "<li><a href='listagem.php?pagina=$i'>
+								$i
+					     		</li></a>";
+					}
+				?>
+
+
+
+				<li>
+					<a href="listagem.php?pagina=<?php
+										    echo $numpaginas?>
+							">
+						$raquo
+					</a>
+				</li>
+
+			</ul>
+		</center>
+
 	</div>	
 </body>
 </html>
