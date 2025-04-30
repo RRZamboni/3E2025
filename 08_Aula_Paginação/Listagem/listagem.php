@@ -1,12 +1,22 @@
 <?php
 	//Conectando com o DB
-	include('../Conexao/conexao.php');
+	include('conexao.php');
 
 	//Query e select
 	$cmd = "SELECT * FROM produto";
 
 	//Executando a query
 	$produto = mysqli_query($con,$cmd);
+
+	// Total de registros do select
+	$total = mysqli_num_rows($produto);
+
+	// Variável para salvar total de itens por página
+	$registro = 4;
+
+	// Calculando  o total de páginas
+	$numpaginas = ceil($total/$registro);
+
 
 ?>
 
@@ -45,7 +55,17 @@
 			<?php 
 		while($linha = mysqli_fetch_array($produto)) 
 		{
-			
+			echo "
+					<tr>
+						<td>".$linha['nome']."</td>
+						<td>".$linha['descricao']."</td>
+						<td>".$linha['id_area']."</td>
+						<td>".$linha['preco_uni']."</td>
+						<td>".$linha['moeda']."</td>
+						<td>".$linha['pais_origem']."</td>
+					</tr>
+			      ";
+
 		}
 
 			?>
